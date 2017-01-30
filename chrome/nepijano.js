@@ -89,9 +89,9 @@
 	 * Get mobile version article
 	 */
 	utils.getArticle = function(cb) {
-		var articleId = utils.articleId();
+		var articleId = utils.articleId();		
 		request = new XMLHttpRequest();
-		request.open('GET', 'http://s.sme.sk/export/ma/?c=' + articleId, true);
+		request.open('GET', 'https://s.sme.sk/export/ma/?c=' + articleId, true);
 		request.onload = function() {
 			if (request.status >= 200 && request.status < 400) {
 				//				try {
@@ -109,9 +109,6 @@
 		                } else {
                 	    		cb(doc.querySelector('.articlewrap'));    
                 		}
-				//				} catch(e) {
-
-				//				}
 			}
 		};
 		request.send();
@@ -126,10 +123,11 @@
 		selectors.push('#article-box #itext_content .art-perex-piano');
 		selectors.push('#article-box #itext_content .art-nexttext-piano');
 // check for new format article containers
+        	selectors.push('#article-box #itext_content .sme_piano_art_promo');
+        	selectors.push('#js-article .sme_piano_art_promo');
         	selectors.push('.piano-teaser-wrapper');
-        	selectors.push('#pianoSmePromoBox');
-        	selectors.push('.sme_piano_art_promo');        	
 		selectors.push('#article-box div[id^=pianoArticle]');
+		selectors.push('#js-article .piano-promo');
 		for (var i = 0, l = selectors.length; i < l; i++) {
 			ret = ret || (document.querySelectorAll(selectors[i]).length != 0);
 		}
