@@ -13,28 +13,15 @@ There is a fork that is maintained by @viliampucik https://github.com/viliampuci
 =======
  
 ##Instalation / Update Google Chrome (0.10.0)
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.0.crx.zip) (.zip)
-* Unzip downloaded file (.crx)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.1.crx) (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Drag and drop unziped (.crx) file to Google Chrome extensions tab
 
 ###Alternative guide for Chrome 35+ on Windows
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.0.zip) (.zip)
-* Unzip downloaded file (.zip)
+* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.1.crx) (.crx)
 * Type chrome://extensions in your Google Chrome browser
 * Enable "*Developer mode*"
 * "*Load unpacked extension...*" from folder where you unpacked the extension
-
-##Instalation / Update Safari (0.10.0)
-* [Download extension](https://github.com/ejci/nepi-jano/raw/master/releases/nepi_jano_0.10.0.safariextz) (.safariextz)
-* Doubleclick the downloaded .safariextz file
-* Pres *Install*
-
-##Installation / Update Firefox (0.10.0)
-* [Download addon](https://github.com/ejci/nepi-jano/raw/master/releases/nepi-jano_0.10.0.xpi)
-* New Tab -> Open File ... (Ctrl+O)
-* Select the downloaded addon (.xpi)
-* Press *Install Now*
 
 
 ##How to use it
