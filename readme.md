@@ -1,4 +1,6 @@
-Nepi Jano! extension 0.10.0
+Original extension by ejci, updated to work with recent changes
+
+Nepi Jano! extension 0.10.1
 =======
 
 Nepi Jano! is a extension for Google Chrome, Firefox & Safari that allows to read paid articles on [www.sme.sk](http://www.sme.sk).
