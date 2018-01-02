@@ -1,8 +1,11 @@
 Nepi Jano! extension 4.5
-=======
+======
 
-Nepi Jano! is a extension for Google Chrome, Firefox & Safari that allows to read paid articles on [www.sme.sk](http://www.sme.sk).
- 
-=======
-###Im not supporting this extension anymore. Feel free to fork it and make changes.
+Prosim podporte redaktorov dennika SME zakupenim si predplatneho: https://www.sme.sk/predplatne/#options
+
+======
+
+Nepi Jano! je rozsirenie pre Google Chrome ktore umoznuje citat Piano clanky na sme.sk
+
+Rozsirenie uz neudrziavam, kludne forkujte a robte zmeny ako len chcete
 
