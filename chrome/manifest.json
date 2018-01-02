@@ -1,19 +1,23 @@
 {
-	"name": "Nepi Jano!",
-	"description": "This extension allows to read paid content on www.sme.sk.",
-	"version": "0.10.0",
 	"manifest_version": 2,
-	"permissions": ["webRequest", "webRequestBlocking", "*://*.sme.sk/*"],
+	"name": "Nepi Jano!",
+	"version": "4.4",
+	"description": "Read paid content on www.sme.sk",
+	"permissions": ["webRequest", "webRequestBlocking", "https://www.sme.sk/storm/*", "https://artemis.sme.sk/*"],
 	"background": {
 		"scripts": ["background.js"]
 	},
 	"content_scripts": [
 		{
-			"js": ["nepijano.js"],
-			"matches": ["*://*.sme.sk/*"]
+			"js": ["article.js"],
+			"matches": ["*://*.sme.sk/c/*"]
+		},
+		{
+			"js": ["video.js"],
+			"matches": ["*://tv.sme.sk/v*"]
 		}
 	],
-	"homepage_url": "https://github.com/ejci/nepi-jano",
+	"homepage_url": "https://github.com/viliampucik/nepi-jano",
 	"icons": {
 		"16": "icon_16.png",
 		"48": "icon_48.png",
