@@ -14,3 +14,21 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
 }, {
 	urls : ["https://artemis.sme.sk/api/v2/article/*"]
 }, ["blocking", "requestHeaders"]);
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (request.query == "get") {
+            console.log(request.url);
+            var req = new XMLHttpRequest();
+            req.open('GET', request.url, true);
+            req.onload = function() {
+                if (req.status == 200) {
+                    sendResponse({"text": req.responseText});
+                    return true;
+                }
+            };
+            req.send();
+            return true;
+        }
+    }
+);

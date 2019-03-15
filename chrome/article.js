@@ -76,30 +76,29 @@ utils.sanitizeContent = function(root, node) {
  * Replace the actual static image block with the real video
  */
 utils.getArticleVideo = function(iosVideo, url) {
-	var request = new XMLHttpRequest();
-	request.iosVideo = iosVideo;
-	request.open('GET', url, true);
-	request.onload = function() {
-		if (request.status == 200) {
-			var image    = request.responseText.match(/<image>(http.*)<\/image>/)[1];
-			var location = request.responseText.match(/<location>(http.*)<\/location>/)[1];
+    chrome.runtime.sendMessage({query: 'get', 'url': url},
+        function(response){
+            console.log('[[PICAVIDEO]]');
+            console.log(response.text);
 
-			var source = document.createElement('source');
-			source.setAttribute('src', location);
+            var image    = response.text.match(/<image>(http.*)<\/image>/)[1];
+            var location = response.text.match(/<location>(http.*)<\/location>/)[1];
 
-			var video = document.createElement('video');
-			video.setAttribute('controls', 'controls');
-			video.setAttribute('width', 640);
-			video.setAttribute('height', 360);
-			video.setAttribute('poster', image);
-			video.appendChild(source);
+            var source = document.createElement('source');
+            source.setAttribute('src', location);
 
-			// replace the static image block
-			request.iosVideo.innerHTML = '';
-			request.iosVideo.appendChild(video);
-		}
-	};
-	request.send();
+            var video = document.createElement('video');
+            video.setAttribute('controls', 'controls');
+            video.setAttribute('width', 640);
+            video.setAttribute('height', 360);
+            video.setAttribute('poster', image);
+            video.appendChild(source);
+
+            // replace the static image block
+            response.iosVideo.innerHTML = '';
+            response.iosVideo.appendChild(video);
+        }
+    );
 };
 
 /**
@@ -118,6 +117,42 @@ utils.getArticleVideos = function(html) {
  * Get mobile version of the article
  */
 utils.getArticle = function(url) {
+    chrome.runtime.sendMessage({ query: 'get', 'url': url }, 
+        function(response) {
+            console.log('[[PICA]]');
+
+            var doc = (new DOMParser()).parseFromString(response.text, 'text/html');
+            doc = utils.removeSelector(doc, 'article > br:first-of-type');
+            doc = utils.removeSelector(doc, '.artemis-ad-position');
+            doc = utils.removeSelector(doc, '.premium-banner');
+            doc = utils.removeSelector(doc, '.button-bar');
+            var node = doc.getElementsByClassName('is-hidden')[0];
+            if (node) {
+                node.replaceWith(...node.childNodes);
+            }
+            if (document.querySelector('.perex')) {
+                doc = utils.removeSelector(doc, '.perex');
+            }
+
+            /* articles */
+            var html;
+            if (html = document.getElementsByTagName('article')[0]) {
+                html.innerHTML = '';
+                if (doc.querySelector('.articlewrap')) {
+                    utils.sanitizeContent(html, doc.querySelector('.articlewrap'));
+                }
+                else {
+                    utils.sanitizeContent(html, doc.getElementsByTagName('article')[0]);
+                }
+            }
+
+            /* article videos */
+            utils.getArticleVideos(html);
+        }
+    );
+
+/*
+    return;
 	var request = new XMLHttpRequest();
 	request.open('GET', url, true);
 	request.onload = function() {
@@ -135,7 +170,7 @@ utils.getArticle = function(url) {
 				doc = utils.removeSelector(doc, '.perex');
 			}
 
-			/* articles */
+			/* articles * /
 			var html;
 			if (html = document.getElementsByTagName('article')[0]) {
 				html.innerHTML = '';
@@ -147,11 +182,12 @@ utils.getArticle = function(url) {
 				}
 			}
 
-			/* article videos */
+			/* article videos * /
 			utils.getArticleVideos(html);
 		}
 	};
 	request.send();
+    */
 };
 
 if (/\.sme\.sk\/c\/\d+\/.*/.test(document.location) && utils.isPianoArticle()) {
