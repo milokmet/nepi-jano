@@ -145,9 +145,11 @@ utils.getArticle = function(url) {
                     utils.sanitizeContent(html, doc.getElementsByTagName('article')[0]);
                 }
             }
-
             /* article videos */
             utils.getArticleVideos(html);
+            setTimeout(function() {
+            	location.href="javascript:twttr.widgets.load(document.getElementsByTagName('article')[0]); void 0;";
+            }, 1000);
         }
     );
 

@@ -1,4 +1,4 @@
-Nepi Jano! extension 4.5
+Nepi Jano! extension 4.6
 ======
 
 Prosim podporte redaktorov dennika SME zakupenim si predplatneho: https://www.sme.sk/predplatne/#options
